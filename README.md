@@ -1,7 +1,7 @@
 # ga-project-2 - Patrick Kittle
  React Front End Project
 
-**Recruitment Site - Fairplay**
+**Recruitment Web Site - Fairplay**
 I have chosen to create a recruitment portal app for my project 2. 
 
 *Overview*
@@ -26,3 +26,21 @@ I will be deploying the bare bones of the site for the project submission, but I
 9. An admin portal will allow for the sdite owners to administer users accounts only at MVP
 
 The above represents an MVP for a business launch - however I do not believe I will have time to deploy all of this functionality
+
+**Technologies Used**
+
+Requirements Met:
+- Javascript
+- React Framework
+- Airtable via API/Fetch Syntax
+
+*Additional Technologies Used*
+Google Auth
+Material UI
+STRETCH: Firebase (TBC)
+STRETCH: Adzuna API (to pull public job postings into the site to drive traffic)
+
+**Important Links**
+Kanban Board Link: Check as I cannot make this public without paying
+Live Site Link: TBC
+Wireframes Link: TBC - Again I canont make public without user signin - to check on that
