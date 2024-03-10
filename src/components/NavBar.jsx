@@ -1,6 +1,5 @@
 import styles from './NavBar.module.css';
 import React, {useContext} from 'react';
-import UserContext from '../context/user-context';
 import {Link} from 'react-router-dom';
 
 //MUI Imports
@@ -16,9 +15,11 @@ import {
 } from '@mui/material';
 import MenuIcon from '@mui/icons-material/Menu';
 import AccountCircle from '@mui/icons-material/AccountCircle';
+import {UserContext} from '../context/UserContext';
 
 const NavBar = () => {
-  const {user, logout, defaultTheme} = useContext(UserContext);
+  const {user} = useContext(UserContext);
+
   return (
     <Box sx={{flexgrow: 1}}>
       <AppBar position="static">

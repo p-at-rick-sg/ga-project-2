@@ -11,7 +11,7 @@ import Box from '@mui/material/Box';
 import LockOutlinedIcon from '@mui/icons-material/LockOutlined';
 import Typography from '@mui/material/Typography';
 import Container from '@mui/material/Container';
-import {createTheme, ThemeProvider} from '@mui/material/styles';
+import {ThemeProvider} from '@mui/material/styles';
 import {useContext} from 'react';
 import UserContext from '../context/user-context';
 
@@ -29,8 +29,8 @@ function Copyright(props) {
 }
 
 export default function SignUp() {
-  // get the default context and destructure to use
-  const {user, logout, defaultTheme} = useContext(UserContext);
+  const {defaultTheme} = useContext(UserContext);
+
   const handleSubmit = event => {
     event.preventDefault();
     const data = new FormData(event.currentTarget);
