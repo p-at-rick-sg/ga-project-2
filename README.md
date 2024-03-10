@@ -37,7 +37,8 @@ Requirements Met:
 *Additional Technologies Used*
 Google Auth
 Material UI
-Firebase (TBC)
+STRETCH: Firebase (TBC)
+STRETCH: Adzuna API (to pull public job postings into the site to drive traffic)
 
 **Important Links**
 Kanban Board Link: Check as I cannot make this public without paying
