@@ -1,35 +1,29 @@
-import { useState } from 'react'
-import reactLogo from './assets/react.svg'
-import viteLogo from '/vite.svg'
-import './App.css'
+import './App.css';
+import NavBar from './components/NavBar';
+import SignIn from './components/SignIn';
+import SignUp from './components/Signup';
+
+import UserContext from './context/user-context';
+import {useState} from 'react';
+import {createTheme} from '@mui/material/styles';
 
 function App() {
-  const [count, setCount] = useState(0)
+  const [user, setUser] = useState({email: 'patrick.kittle@gmail.com', name: 'Patrick'}); // this will start as null after testing
+  const logout = () => {
+    setUser(null);
+  };
+
+  const defaultTheme = createTheme(); //using context to pass this down to each component
 
   return (
-    <>
-      <div>
-        <a href="https://vitejs.dev" target="_blank">
-          <img src={viteLogo} className="logo" alt="Vite logo" />
-        </a>
-        <a href="https://react.dev" target="_blank">
-          <img src={reactLogo} className="logo react" alt="React logo" />
-        </a>
-      </div>
-      <h1>Vite + React</h1>
-      <div className="card">
-        <button onClick={() => setCount((count) => count + 1)}>
-          count is {count}
-        </button>
-        <p>
-          Edit <code>src/App.jsx</code> and save to test HMR
-        </p>
-      </div>
-      <p className="read-the-docs">
-        Click on the Vite and React logos to learn more
-      </p>
-    </>
-  )
+    <UserContext.Provider value={{user, logout, defaultTheme: defaultTheme}}>
+      <>
+        <NavBar></NavBar>
+        {/* <SignUp></SignUp>
+        <SignIn></SignIn> */}
+      </>
+    </UserContext.Provider>
+  );
 }
 
-export default App
+export default App;
