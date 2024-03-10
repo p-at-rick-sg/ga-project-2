@@ -27,6 +27,19 @@ I will be deploying the bare bones of the site for the project submission, but I
 
 The above represents an MVP for a business launch - however I do not believe I will have time to deploy all of this functionality
 
+**Technologies Used**
+
+Requirements Met:
+- Javascript
+- React Framework
+- Airtable via API/Fetch Syntax
+
+*Additional Technologies Used*
+Google Auth
+Material UI
+Firebase (TBC)
+
+**Important Links**
 Kanban Board Link: Check as I cannot make this public without paying
 Live Site Link: TBC
 Wireframes Link: TBC - Again I canont make public without user signin - to check on that
