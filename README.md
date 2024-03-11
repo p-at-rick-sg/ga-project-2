@@ -27,6 +27,13 @@ I will be deploying the bare bones of the site for the project submission, but I
 
 The above represents an MVP for a business launch - however I do not believe I will have time to deploy all of this functionality
 
+**Routes**
+I will use 3 routes for the app:
+1. Landing '/'
+2. Users '/users'
+3. Recruiters '/recruiters'
+4. Admin '/admin'
+
 **Technologies Used**
 
 Requirements Met:
