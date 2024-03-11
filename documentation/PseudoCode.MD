@@ -5,19 +5,20 @@ Theme Object Any theme adjustments to the default theme
 code in the components. At a high level this will inlcude:
 
 useFetch - maybe more than 1 depending on the complexity/variation in headers - for example I may
-have a useFetchBearer and a useFetchData 
+have a useFetchBearer and a useFetchData.
 
 **Context**
 I will use a userContext for user logged in state and data relevant to that 
 I may add a themeContext to enable me to update MUI theme settings globally or on a route basis and add light/dark modifier at a later date.
 
 <App />
-Will remain as the root of the project. Will have the global context applied at this level
+Will remain as the root of the project. Will have the global context applied at this level.
 
 <NavBar />
 Diplay the main header, menus and user logged in/out icon. This will be dynamic based on the user logged in state and type of user:
 Check for use login status and account type (user, recruiter, admin) If the user is logged in,
-display the correct display page If there is no login, display the main public page
+display the correct display page If there is no login, display the main public page.
+
 
 **Main Page Component**
 Pull latest jobs form the database and display 5 of them in a list. Any click avtivity will redirect the user lo login or signup page.
