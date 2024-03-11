@@ -30,9 +30,17 @@ Update Profile Buutton:
 Update Skills Button:
 - Allow user to update their job skills & Submit these details - it will save to the airtable database or firebase
 
-*UserDisplay*
+*UserDisplay* (All propped down from UserMain)
 List of all open job roles that meet the users location and skills. 
 Allow user to change location parameter to update the job roles that are matched with their skills in different locations(this will autopopulate on load if they previously set their skills or after they add them)
+
+*UserProfile* (All Propped down from UserMain)
+Display existing profile elements
+Update functions for:
+Name
+Skills
+Locations
+Preferred job Title
 
 **RecruiterMain Component** 
 
@@ -47,5 +55,15 @@ Post New Role Button
 *RecruiterDisplay*
 Shows a list of the jobs - with a filter for active (default), draft and closed. Each item will have a button to open the details/update the posting
 
+*RecruiterProfile* (All Propped down from RecruiterMain)
+Display existing profile elements
+Update functions for:
+Name
+Company Details
+Locations
+Company Users
+
+
+
 **AdminDisplay Component** This is out of scope at this point - admin of users can be done directly
-in thew Airtable database
+in the Airtable database
