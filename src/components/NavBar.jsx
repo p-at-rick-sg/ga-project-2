@@ -1,24 +1,14 @@
 import styles from './NavBar.module.css';
-import React, {useContext} from 'react';
 import {Link} from 'react-router-dom';
+import {useUser} from '../hooks/useUser';
 
 //MUI Imports
-import {
-  AppBar,
-  Box,
-  Button,
-  Toolbar,
-  CssBaseline,
-  Typography,
-  makeStyles,
-  IconButton,
-} from '@mui/material';
+import {AppBar, Box, Button, Toolbar, Typography, IconButton} from '@mui/material';
 import MenuIcon from '@mui/icons-material/Menu';
 import AccountCircle from '@mui/icons-material/AccountCircle';
-import {UserContext} from '../context/UserContext';
 
 const NavBar = () => {
-  const {user} = useContext(UserContext);
+  const {user} = useUser();
 
   return (
     <Box sx={{flexgrow: 1}}>

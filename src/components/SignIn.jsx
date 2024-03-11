@@ -1,4 +1,3 @@
-import * as React from 'react';
 import Avatar from '@mui/material/Avatar';
 import Button from '@mui/material/Button';
 import CssBaseline from '@mui/material/CssBaseline';
@@ -12,8 +11,7 @@ import LockOutlinedIcon from '@mui/icons-material/LockOutlined';
 import Typography from '@mui/material/Typography';
 import Container from '@mui/material/Container';
 import {ThemeProvider} from '@mui/material/styles';
-import {useContext} from 'react';
-import {UserContext} from '../context/UserContext';
+import {useUser} from '../hooks/useUser';
 
 function Copyright(props) {
   return (
@@ -29,7 +27,7 @@ function Copyright(props) {
 }
 
 export default function SignIn() {
-  const {defaultTheme} = useContext(UserContext);
+  const {defaultTheme} = useUser();
   const handleSubmit = event => {
     event.preventDefault();
     const data = new FormData(event.currentTarget);

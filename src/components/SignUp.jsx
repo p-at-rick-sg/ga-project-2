@@ -12,8 +12,7 @@ import LockOutlinedIcon from '@mui/icons-material/LockOutlined';
 import Typography from '@mui/material/Typography';
 import Container from '@mui/material/Container';
 import {ThemeProvider} from '@mui/material/styles';
-import {useContext} from 'react';
-import UserContext from '../context/user-context';
+import {useUser} from '../hooks/useUser';
 
 function Copyright(props) {
   return (
@@ -29,7 +28,7 @@ function Copyright(props) {
 }
 
 export default function SignUp() {
-  const {defaultTheme} = useContext(UserContext);
+  const {defaultTheme} = useUser();
 
   const handleSubmit = event => {
     event.preventDefault();
