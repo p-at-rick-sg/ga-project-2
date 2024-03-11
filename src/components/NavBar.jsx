@@ -1,5 +1,5 @@
 import styles from './NavBar.module.css';
-import {Link} from 'react-router-dom';
+import {NavLink, Link} from 'react-router-dom';
 import {useUser} from '../hooks/useUser';
 
 //MUI Imports
@@ -8,7 +8,7 @@ import MenuIcon from '@mui/icons-material/Menu';
 import AccountCircle from '@mui/icons-material/AccountCircle';
 
 const NavBar = () => {
-  const {user} = useUser();
+  const {user, pageTitle} = useUser();
 
   return (
     <Box sx={{flexgrow: 1}}>
@@ -19,7 +19,7 @@ const NavBar = () => {
           </IconButton>
 
           <Typography variant="h6" component="div" sx={{flexGrow: 1}}>
-            Placeholder Page Title
+            {pageTitle && pageTitle}
           </Typography>
           <Button color="inherit">Search</Button>
           <Button color="inherit">Post Job</Button>
@@ -32,6 +32,3 @@ const NavBar = () => {
 };
 
 export default NavBar;
-
-// const {user, logout} = useContext(UserContext);
-// return <div>{user?.name}</div>;

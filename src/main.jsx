@@ -1,6 +1,6 @@
 import React from 'react';
 import ReactDOM from 'react-dom/client';
-import {createBrowserRouter, RouterProvider} from 'react-router-dom';
+import {BrowserRouter} from 'react-router-dom';
 import App from './App.jsx';
 // MUI Imports
 import './index.css';
@@ -15,7 +15,9 @@ import {UserProvider} from './context/UserContext.jsx';
 ReactDOM.createRoot(document.getElementById('root')).render(
   <React.StrictMode>
     <UserProvider>
-      <App />
+      <BrowserRouter>
+        <App />
+      </BrowserRouter>
     </UserProvider>
   </React.StrictMode>
 );

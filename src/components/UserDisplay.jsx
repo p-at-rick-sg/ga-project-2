@@ -1,5 +1,6 @@
 import {useEffect, useState} from 'react';
 import useFetch from '../hooks/useFetch';
+import {useUser} from '../hooks/useUser'; //import the useUser context
 
 const UserDisplay = () => {
   const bearer = import.meta.env.VITE_AIRTABLEPAT;
@@ -10,31 +11,6 @@ const UserDisplay = () => {
   const [userList, setUserList] = useState({});
   const [users, fetchUsers] = useFetch();
   const [user, fetchUser] = useFetch();
-
-  // const getUsers = async signal => {
-  //   const myHeaders = new Headers();
-  //   myHeaders.append(
-  //     'Authorization',
-  //     'Bearer patPYCjP4bRmQsuEc.15b07cbdd7f809eadba37fc8407f90ae9db79b602a23f61b7f1cee44c5e4429b'
-  //   );
-  //   try {
-  //     const response = await fetch(BASEURI + BASEID + TABLEID, {
-  //       signal,
-  //       method: 'GET',
-  //       headers: myHeaders,
-  //       redirect: 'follow',
-  //     });
-  //     if (response.ok) {
-  //       console.log('response OK');
-  //       const data = await response.json();
-  //       setUserList(data);
-  //     }
-  //   } catch (err) {
-  //     if (err.name !== 'AbortError') {
-  //       console.log(err.message);
-  //     }
-  //   }
-  // };
 
   // useEffect(() => {
   //   //get all users
@@ -81,8 +57,14 @@ const UserDisplay = () => {
     const fullURI = BASEURI + BASEID + USERID;
     console.log(fullURI);
     fetchUser(fullURI, myRequestOptions);
-    // https://api.airtable.com/v0/appczfLTtCoMql9J8//rec861xSLSYZzzwbV
   };
+
+  // testing the propped context by destructuing the function we need here
+  const {setPageTitle} = useUser();
+  // and calling it in the useEffect function below
+  useEffect(() => {
+    setPageTitle('Users Area');
+  }, []);
 
   return (
     <div>
