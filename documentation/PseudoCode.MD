@@ -25,7 +25,7 @@ Pull latest jobs form the database and display 5 of them in a list. Any click av
 **UserMain Component** 
 
 Show users name in the Navbar as logged in user
-Update Profile Buutton:
+Update Profile Button:
 - Allow user to update their details 
 Update Skills Button:
 - Allow user to update their job skills & Submit these details - it will save to the airtable database or firebase
