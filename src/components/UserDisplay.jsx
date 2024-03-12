@@ -26,10 +26,8 @@ const UserDisplay = () => {
     const controller = new AbortController();
     const signal = controller.signal;
     const myHeaders = new Headers();
-    myHeaders.append(
-      'Authorization',
-      'Bearer patPYCjP4bRmQsuEc.15b07cbdd7f809eadba37fc8407f90ae9db79b602a23f61b7f1cee44c5e4429b'
-    );
+    myHeaders.append('Authorization', 'Bearer ' + import.meta.env.VITE_AIRTABLEPAT);
+
     const myRequestOptions = {
       signal,
       method: 'GET',
@@ -44,10 +42,8 @@ const UserDisplay = () => {
     const controller = new AbortController();
     const signal = controller.signal;
     const myHeaders = new Headers();
-    myHeaders.append(
-      'Authorization',
-      'Bearer patPYCjP4bRmQsuEc.15b07cbdd7f809eadba37fc8407f90ae9db79b602a23f61b7f1cee44c5e4429b'
-    );
+    myHeaders.append('Authorization', 'Bearer ' + import.meta.env.VITE_AIRTABLEPAT);
+
     const myRequestOptions = {
       signal,
       method: 'GET',
@@ -58,13 +54,6 @@ const UserDisplay = () => {
     console.log(fullURI);
     fetchUser(fullURI, myRequestOptions);
   };
-
-  // testing the propped context by destructuing the function we need here
-  const {setPageTitle} = useUser();
-  // and calling it in the useEffect function below
-  useEffect(() => {
-    setPageTitle('Users Area');
-  }, []);
 
   return (
     <div>

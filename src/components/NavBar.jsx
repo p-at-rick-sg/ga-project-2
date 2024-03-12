@@ -21,9 +21,14 @@ const NavBar = () => {
           <Typography variant="h6" component="div" sx={{flexGrow: 1}}>
             {pageTitle && pageTitle}
           </Typography>
-          <Button color="inherit">Search</Button>
-          <Button color="inherit">Post Job</Button>
+          {/* <Button color="inherit">Search</Button>  //will need this later in the users section possibly */}
+          {/* <Button color="inherit">Post Job</Button>  //will need this later once we get to recruiter section */}
           {!user.name && <Button color="inherit">Login</Button>}
+          {!user.name && (
+            <Button color="inherit" component={NavLink} to="signup">
+              Sign Up
+            </Button>
+          )}
           {user.name && <AccountCircle />}
         </Toolbar>
       </AppBar>

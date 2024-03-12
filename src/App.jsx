@@ -24,7 +24,10 @@ function App() {
     <>
       <NavBar pageTitle={pageTitle}></NavBar>
       <Routes>
-        <Route path="/" element={<LandingPage />} />
+        <Route path="/" element={<Navigate to="home" />} />
+        <Route path="home" element={<LandingPage />} />
+        <Route path="signup" element={<SignUp />} />
+        <Route path="signin" element={<SignIn />} />
         <Route path="user" element={<UserPage />} />
         <Route path="recruiter" element={<RecruiterPage />} />
         <Route path="admin" element={<AdminPage />} />

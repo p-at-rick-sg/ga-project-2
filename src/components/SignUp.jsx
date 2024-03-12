@@ -1,4 +1,4 @@
-import * as React from 'react';
+import {useState} from 'react';
 import Avatar from '@mui/material/Avatar';
 import Button from '@mui/material/Button';
 import CssBaseline from '@mui/material/CssBaseline';
@@ -29,6 +29,7 @@ function Copyright(props) {
 
 export default function SignUp() {
   const {defaultTheme} = useUser();
+  const [passwordError, setPasswordError] = useState(false);
 
   const handleSubmit = event => {
     event.preventDefault();
@@ -36,12 +37,14 @@ export default function SignUp() {
     console.log({
       email: data.get('email'),
       password: data.get('password'),
+      passwordCheck: data.get('passwordCheck'),
     });
+    if (password !== passwordCheck) setPasswordError(true);
   };
 
   return (
     <ThemeProvider theme={defaultTheme}>
-      <Container component="main" maxWidth="xs">
+      <Container component="main" maxWidth="sm">
         <CssBaseline />
         <Box
           sx={{
@@ -101,6 +104,18 @@ export default function SignUp() {
                 />
               </Grid>
               <Grid item xs={12}>
+                {passwordError && <div>Passwords Do Not Match</div>}
+                <TextField
+                  required
+                  fullWidth
+                  name="passwordCheck"
+                  label="PasswordCheck"
+                  type="password"
+                  id="passwordCheck"
+                  autoComplete="new-password"
+                />
+              </Grid>
+              <Grid item xs={12}>
                 <FormControlLabel
                   control={<Checkbox value="allowExtraEmails" color="primary" />}
                   label="I want to receive inspiration, marketing promotions and updates via email."
@@ -108,12 +123,12 @@ export default function SignUp() {
               </Grid>
             </Grid>
             <Button type="submit" fullWidth variant="contained" sx={{mt: 3, mb: 2}}>
-              Sign Up
+              Sign Up Now
             </Button>
             <Grid container justifyContent="flex-end">
               <Grid item>
-                <Link href="#" variant="body2">
-                  Already have an account? Sign in
+                <Link href="signin" variant="body2">
+                  Already have an account? Sign in Here
                 </Link>
               </Grid>
             </Grid>
