@@ -11,8 +11,24 @@ const logout = () => {
 export function UserProvider({children}) {
   //set the UserContext values and adding to an object here for clarity
   const [user, setUser] = useState({email: 'patrick.kittle@gmail.com', name: null});
+  const [authenticated, setAuthenticated] = useState(false);
   const [pageTitle, setPageTitle] = useState('');
-  const value = {defaultTheme, user, setUser, logout, pageTitle, setPageTitle}; //this object is available in the useUser context
+  const BASEURI = 'https://api.airtable.com/v0/';
+  const BASEID = 'appczfLTtCoMql9J8/';
+  const TABLEID = 'tblK9XMatvmUi5vNS';
+  const value = {
+    defaultTheme,
+    user,
+    setUser,
+    setAuthenticated,
+    authenticated,
+    logout,
+    pageTitle,
+    setPageTitle,
+    BASEURI,
+    BASEID,
+    TABLEID,
+  }; //this object is available in the useUser context
 
   return <UserContext.Provider value={value}>{children}</UserContext.Provider>;
 }

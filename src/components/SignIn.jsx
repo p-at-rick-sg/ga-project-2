@@ -12,13 +12,16 @@ import Typography from '@mui/material/Typography';
 import Container from '@mui/material/Container';
 import {ThemeProvider} from '@mui/material/styles';
 import {useUser} from '../hooks/useUser';
+import {NavLink} from 'react-router-dom';
+import {useState, useEffect} from 'react';
+import useFetch from '../hooks/useFetch';
 
 function Copyright(props) {
   return (
     <Typography variant="body2" color="text.secondary" align="center" {...props}>
       {'Copyright © '}
       <Link color="inherit" href="https://mui.com/">
-        Your Website
+        Patrick Kittle
       </Link>{' '}
       {new Date().getFullYear()}
       {'.'}
@@ -27,14 +30,87 @@ function Copyright(props) {
 }
 
 export default function SignIn() {
-  const {defaultTheme} = useUser();
-  const handleSubmit = event => {
-    event.preventDefault();
-    const data = new FormData(event.currentTarget);
-    console.log({
-      email: data.get('email'),
-      password: data.get('password'),
-    });
+  const {defaultTheme, BASEURI, BASEID, TABLEID, authenticated, setAuthenticated, setUser} =
+    useUser();
+  const [users, fetchUsers] = useFetch();
+  const [creds, setCreds] = useState({email: '', password: ''});
+  const [errors, setErrors] = useState([]);
+  const [submitting, setSubmitting] = useState(false);
+
+  const validateValues = inputValues => {
+    const errors = [];
+    const regex = new RegExp('^[^@]+@[^@]+.[^@]+$');
+    if (regex.test(inputValues.email)) {
+      console.log('email ok');
+      if (inputValues.password.length < 8) {
+        errors.push('Password is too short');
+        console.log('password too short');
+      }
+    } else errors.push('Invalid Email Address');
+    return errors;
+  };
+
+  // the getuser function called to pull all the user records
+  const getAllUsers = controller => {
+    const signal = controller.signal;
+    const myHeaders = new Headers();
+    myHeaders.append('Authorization', 'Bearer ' + import.meta.env.VITE_AIRTABLEPAT);
+
+    const myRequestOptions = {
+      signal,
+      method: 'GET',
+      headers: myHeaders,
+      redirect: 'follow',
+    };
+    const fullURI = BASEURI + BASEID + TABLEID;
+    fetchUsers(fullURI, myRequestOptions);
+    //do i put the isLoading state to true here or before I call the
+  };
+
+  //pulling the full list of users
+  useEffect(() => {
+    console.log('initial fetch users effect');
+    if (errors.length === 0 && submitting) {
+      const controller = new AbortController();
+      getAllUsers(controller.signal);
+
+      return () => {
+        controller.abort();
+      };
+    }
+  }, [errors, submitting]);
+
+  //checking the creds against the users data
+  useEffect(() => {
+    if (users.length !== 0) {
+      for (const userRecord of users.records) {
+        console.log(userRecord.fields.email);
+        if (userRecord.fields.email.toLowerCase() === creds.email.toLowerCase()) {
+          console.log('email checked OK');
+          if (userRecord.fields.password === creds.password) {
+            console.log('password is OK');
+            setUser({email: creds.email, name: 'test-name'});
+            setAuthenticated(true);
+            console.log('set the variables', authenticated);
+            break;
+          } else console.log('incorrect password');
+        } else console.log('incorrect username');
+      }
+    }
+  }, [users]);
+
+  const handleSubmit = e => {
+    e.preventDefault();
+    setErrors(validateValues({email: creds.email, password: creds.password}));
+    //creds are valid - checking the user/password logic here
+    setSubmitting(true); //need to set this back to false if the login fails
+    console.log('submitting is: ', submitting);
+  };
+
+  const handleChange = e => {
+    //check for the sending field and update the values accordingly
+    if (e.target.name === 'email') setCreds({email: e.target.value, password: creds.password});
+    if (e.target.name === 'password') setCreds({email: creds.email, password: e.target.value});
   };
 
   return (
@@ -54,6 +130,10 @@ export default function SignIn() {
           <Typography component="h1" variant="h5">
             Sign in
           </Typography>
+          {errors.map(error => (
+            <div>{error}</div>
+          ))}
+          {authenticated && <div>User Authenticated OK</div>}
           <Box component="form" onSubmit={handleSubmit} noValidate sx={{mt: 1}}>
             <TextField
               margin="normal"
@@ -64,6 +144,8 @@ export default function SignIn() {
               name="email"
               autoComplete="email"
               autoFocus
+              value={creds.email}
+              onChange={handleChange}
             />
             <TextField
               margin="normal"
@@ -74,6 +156,8 @@ export default function SignIn() {
               type="password"
               id="password"
               autoComplete="current-password"
+              value={creds.password}
+              onChange={handleChange}
             />
             <FormControlLabel
               control={<Checkbox value="remember" color="primary" />}
@@ -84,13 +168,11 @@ export default function SignIn() {
             </Button>
             <Grid container>
               <Grid item xs>
-                <Link href="#" variant="body2">
-                  Forgot password?
-                </Link>
+                <Link>Forgot password?</Link>
               </Grid>
               <Grid item>
-                <Link href="#" variant="body2">
-                  {"Don't have an account? Sign Up"}
+                <Link variant="body2">
+                  <NavLink to="/signup">{"Don't have an account? Sign Up"}</NavLink>
                 </Link>
               </Grid>
             </Grid>

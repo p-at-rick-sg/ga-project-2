@@ -23,7 +23,11 @@ const NavBar = () => {
           </Typography>
           {/* <Button color="inherit">Search</Button>  //will need this later in the users section possibly */}
           {/* <Button color="inherit">Post Job</Button>  //will need this later once we get to recruiter section */}
-          {!user.name && <Button color="inherit">Login</Button>}
+          {!user.name && (
+            <Button color="inherit" component={NavLink} to="signin">
+              Login
+            </Button>
+          )}
           {!user.name && (
             <Button color="inherit" component={NavLink} to="signup">
               Sign Up

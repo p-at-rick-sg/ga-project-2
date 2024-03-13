@@ -14,27 +14,40 @@ import NotFoundPage from './pages/NotFoundPage';
 import {useUser} from './hooks/useUser';
 
 //MUI Imports
-import {createTheme} from '@mui/material/styles';
+//import {createTheme} from '@mui/material/styles'; i think this is in the useUser hook now - REMOVE
 import SignIn from './components/SignIn';
 import SignUp from './components/SignUp';
 
 function App() {
-  const {pageTitle} = useUser();
-  return (
-    <>
-      <NavBar pageTitle={pageTitle}></NavBar>
-      <Routes>
-        <Route path="/" element={<Navigate to="home" />} />
-        <Route path="home" element={<LandingPage />} />
-        <Route path="signup" element={<SignUp />} />
-        <Route path="signin" element={<SignIn />} />
-        <Route path="user" element={<UserPage />} />
-        <Route path="recruiter" element={<RecruiterPage />} />
-        <Route path="admin" element={<AdminPage />} />
-        <Route path="*" element={<NotFoundPage />} />
-      </Routes>
-    </>
-  );
+  const {pageTitle, authenticated} = useUser();
+
+  if (authenticated) {
+    return (
+      <>
+        <NavBar pageTitle={pageTitle}></NavBar>
+        <Routes>
+          <Route path="signin" element={<Navigate to="/user" />} />
+          <Route path="user" element={<UserPage />} />
+        </Routes>
+      </>
+    );
+  } else {
+    return (
+      <>
+        <NavBar pageTitle={pageTitle}></NavBar>
+        <Routes>
+          <Route path="/" element={<Navigate to="home" />} />
+          <Route path="home" element={<LandingPage />} />
+          <Route path="signup" element={<SignUp />} />
+          <Route path="signin" element={<SignIn />} />
+          {/* <Route path="user" element={<UserPage />} /> */}
+          <Route path="recruiter" element={<RecruiterPage />} />
+          <Route path="admin" element={<AdminPage />} />
+          <Route path="*" element={<NotFoundPage />} />
+        </Routes>
+      </>
+    );
+  }
 }
 
 export default App;

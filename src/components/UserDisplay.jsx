@@ -51,7 +51,6 @@ const UserDisplay = () => {
       redirect: 'follow',
     };
     const fullURI = BASEURI + BASEID + USERID;
-    console.log(fullURI);
     fetchUser(fullURI, myRequestOptions);
   };
 
