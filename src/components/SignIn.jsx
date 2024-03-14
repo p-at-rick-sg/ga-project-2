@@ -89,7 +89,7 @@ export default function SignIn() {
           if (userRecord.fields.password === creds.password) {
             console.log('password is OK');
             console.log(userRecord.id);
-            setUser({email: creds.email, name: 'test-name', airtableId: userRecord.id});
+            setUser({email: creds.email, airtableId: userRecord.id});
             setAuthenticated(true);
             console.log('set useID to ', userRecord.id);
             break;
@@ -104,7 +104,6 @@ export default function SignIn() {
     setErrors(validateValues({email: creds.email, password: creds.password}));
     //creds are valid - checking the user/password logic here
     setSubmitting(true); //need to set this back to false if the login fails
-    console.log('submitting is: ', submitting);
   };
 
   const handleChange = e => {

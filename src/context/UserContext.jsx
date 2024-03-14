@@ -14,6 +14,8 @@ export function UserProvider({children}) {
     email: null,
     name: null,
     airtableId: null,
+    firstName: null,
+    primaryLocation: null,
   });
   const [authenticated, setAuthenticated] = useState(false);
   const [pageTitle, setPageTitle] = useState('');
