@@ -7,8 +7,12 @@ import {AppBar, Box, Button, Toolbar, Typography, IconButton} from '@mui/materia
 import MenuIcon from '@mui/icons-material/Menu';
 import AccountCircle from '@mui/icons-material/AccountCircle';
 
-const NavBar = () => {
+const NavBar = ({setShowUpdate, showUpdate}) => {
   const {user, pageTitle} = useUser();
+  const handleClick = () => {
+    if (showUpdate) setShowUpdate(false);
+    else setShowUpdate(true);
+  };
 
   return (
     <Box sx={{flexgrow: 1}}>
@@ -33,7 +37,7 @@ const NavBar = () => {
               Sign Up
             </Button>
           )}
-          {user.name && <AccountCircle />}
+          {user.name && <AccountCircle onClick={handleClick} sx={{fontSize: 40}} />}
         </Toolbar>
       </AppBar>
     </Box>

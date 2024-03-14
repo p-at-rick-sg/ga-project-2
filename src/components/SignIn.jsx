@@ -64,7 +64,7 @@ export default function SignIn() {
     };
     const fullURI = BASEURI + BASEID + TABLEID;
     fetchUsers(fullURI, myRequestOptions);
-    //do i put the isLoading state to true here or before I call the
+    //do i put the isLoading state to true here or before I call the fetch hook
   };
 
   //pulling the full list of users
@@ -86,12 +86,12 @@ export default function SignIn() {
       for (const userRecord of users.records) {
         console.log(userRecord.fields.email);
         if (userRecord.fields.email.toLowerCase() === creds.email.toLowerCase()) {
-          console.log('email checked OK');
           if (userRecord.fields.password === creds.password) {
             console.log('password is OK');
-            setUser({email: creds.email, name: 'test-name'});
+            console.log(userRecord.id);
+            setUser({email: creds.email, name: 'test-name', airtableId: userRecord.id});
             setAuthenticated(true);
-            console.log('set the variables', authenticated);
+            console.log('set useID to ', userRecord.id);
             break;
           } else console.log('incorrect password');
         } else console.log('incorrect username');

@@ -1,42 +1,32 @@
 import {useEffect, useState} from 'react';
 import useFetch from '../hooks/useFetch';
-import {useUser} from '../hooks/useUser'; //import the useUser context
+import {useUser} from '../hooks/useUser';
+import styles from './UserDisplay.module.css';
+
+// MUI Imports
+
+import CssBaseline from '@mui/material/CssBaseline';
+
+import Box from '@mui/material/Box';
+import Typography from '@mui/material/Typography';
+import Container from '@mui/material/Container';
+import {ThemeProvider} from '@mui/material/styles';
+// Import the functions you need from the SDKs you need FIREBASE
+import {initializeApp} from 'firebase/app';
+import {getFirestore} from 'firebase/firestore';
+import {getAnalytics} from 'firebase/analytics';
+import {collection, addDoc, getDocs} from 'firebase/firestore';
+
+// TODO: Add SDKs for Firebase products that you want to use
+// https://firebase.google.com/docs/web/setup#available-libraries
 
 const UserDisplay = () => {
+  const {defaultTheme, BASEURI, BASEID, TABLEID, authenticated, setAuthenticated, setUser, user} =
+    useUser();
   const bearer = import.meta.env.VITE_AIRTABLEPAT;
-  const BASEURI = 'https://api.airtable.com/v0/';
-  const BASEID = 'appczfLTtCoMql9J8/';
-  const TABLEID = 'tblK9XMatvmUi5vNS';
-  const USERID = 'users/rec861xSLSYZzzwbV'; //for testing of pulling 1 record
-  const [userList, setUserList] = useState({});
-  const [users, fetchUsers] = useFetch();
-  const [user, fetchUser] = useFetch();
-
-  // useEffect(() => {
-  //   //get all users
-  //   const controller = new AbortController();
-  //   getUsers(controller.signal);
-
-  //   return () => {
-  //     controller.abort();
-  //   };
-  // }, []);
-
-  const getAllUsers = () => {
-    const controller = new AbortController();
-    const signal = controller.signal;
-    const myHeaders = new Headers();
-    myHeaders.append('Authorization', 'Bearer ' + import.meta.env.VITE_AIRTABLEPAT);
-
-    const myRequestOptions = {
-      signal,
-      method: 'GET',
-      headers: myHeaders,
-      redirect: 'follow',
-    };
-    const fullURI = BASEURI + BASEID + TABLEID;
-    fetchUsers(fullURI, myRequestOptions);
-  };
+  const USERID = user.airtableId;
+  const [loggedInUser, fetchUser] = useFetch();
+  const [showUpdateModal, setShowUpdateModal] = useState(false);
 
   const getOneUser = () => {
     const controller = new AbortController();
@@ -50,22 +40,88 @@ const UserDisplay = () => {
       headers: myHeaders,
       redirect: 'follow',
     };
-    const fullURI = BASEURI + BASEID + USERID;
+    const fullURI = BASEURI + BASEID + TABLEID + '/' + USERID;
     fetchUser(fullURI, myRequestOptions);
   };
 
+  // ******* FIREBASE CONFIG *******
+
+  // Your web app's Firebase configuration
+
+  // Initialize Firebase
+  // const app = initializeApp(firebaseConfig);
+  // const analytics = getAnalytics(app);
+  // const db = getFirestore(app);
+
+  //
+  //  ******** END FIREBASE CONFIG ********
+
+  // ******* Start Firebase Firestore Testing
+  // const testFirestore = async () => {
+  //   try {
+  //     const docRef = await addDoc(collection(db, 'users'), {
+  //       first: 'Ada',
+  //       last: 'Lovelace',
+  //       born: 1815,
+  //     });
+  //     console.log('Document written with ID: ', docRef.id);
+  //   } catch (e) {
+  //     console.error('Error adding document: ', e);
+  //   }
+  // };
+
+  // const testFirestore2 = async () => {
+  //   try {
+  //     const docRef = await addDoc(collection(db, 'users'), {
+  //       first: 'Alan',
+  //       middle: 'Mathison',
+  //       last: 'Turing',
+  //       born: 1912,
+  //     });
+
+  //     console.log('Document written with ID: ', docRef.id);
+  //   } catch (e) {
+  //     console.error('Error adding document: ', e);
+  //   }
+  // };
+
+  // const getFirebaseData = async () => {
+  //   const querySnapshot = await getDocs(collection(db, 'users'));
+  //   querySnapshot.forEach(doc => {
+  //     console.log(`${doc.id} => ${doc.data()}`);
+  //   });
+  // };
+
+  // useEffect(() => {
+  //   console.log('Testing Firestore Connection');
+  //   // testFirestore();
+  //   // testFirestore2();
+  //   getFirebaseData();
+  // }, [user]);
+
+  //  ******* End Firestore Testing ********
+
   return (
-    <div>
-      <p>User Display Component</p>
-      <button onClick={getAllUsers}>Get All Users</button>
-      {users && JSON.stringify(users)}
-      <br />
-      <button onClick={getOneUser}>Get 1 user</button>
-      {user && JSON.stringify(user)}
-    </div>
+    <ThemeProvider theme={defaultTheme}>
+      <Container maxWidth="md">
+        <Box
+          sx={{
+            marginTop: 4,
+            display: 'flex',
+            flexDirection: 'column',
+            alignItems: 'center',
+          }}>
+          <Typography variant="h2">Welcome Back</Typography>
+          <Typography variant="h5">{user.email}</Typography>
+        </Box>
+      </Container>
+
+      <div>
+        <div className={styles.leftDiv}>Jobs List</div>
+        <div className={styles.rightDiv}>Applied Jobs</div>
+      </div>
+    </ThemeProvider>
   );
 };
 
 export default UserDisplay;
-
-//import.meta.env.VITE_

@@ -13,21 +13,27 @@ import NotFoundPage from './pages/NotFoundPage';
 // context stuff
 import {useUser} from './hooks/useUser';
 
-//MUI Imports
-//import {createTheme} from '@mui/material/styles'; i think this is in the useUser hook now - REMOVE
 import SignIn from './components/SignIn';
 import SignUp from './components/SignUp';
 
 function App() {
   const {pageTitle, authenticated} = useUser();
-
+  const [showUpdate, setShowUpdate] = useState(false);
   if (authenticated) {
     return (
       <>
-        <NavBar pageTitle={pageTitle}></NavBar>
+        <NavBar
+          pageTitle={pageTitle}
+          setShowUpdate={setShowUpdate}
+          showUpdate={showUpdate}></NavBar>
         <Routes>
+          <Route path="/" element={<Navigate to="home" />} />
+          <Route path="home" element={<LandingPage />} />
           <Route path="signin" element={<Navigate to="/user" />} />
-          <Route path="user" element={<UserPage />} />
+          <Route
+            path="user"
+            element={<UserPage showUpdate={showUpdate} setShowUpdate={setShowUpdate} />}
+          />
         </Routes>
       </>
     );
@@ -40,7 +46,6 @@ function App() {
           <Route path="home" element={<LandingPage />} />
           <Route path="signup" element={<SignUp />} />
           <Route path="signin" element={<SignIn />} />
-          {/* <Route path="user" element={<UserPage />} /> */}
           <Route path="recruiter" element={<RecruiterPage />} />
           <Route path="admin" element={<AdminPage />} />
           <Route path="*" element={<NotFoundPage />} />

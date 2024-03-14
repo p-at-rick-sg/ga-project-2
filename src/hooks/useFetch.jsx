@@ -2,7 +2,6 @@ import {useState} from 'react';
 
 const useFetch = () => {
   const [data, setData] = useState([]);
-
   const fetchData = async (url, reqOptions) => {
     try {
       const response = await fetch(url, reqOptions);
@@ -17,7 +16,8 @@ const useFetch = () => {
         console.log('the fetch was aborted');
       } else {
         //setIsPending(false);
-        setError('Could not fetch the data');
+        //setError('Could not fetch the data');
+        console.log(err.name);
       }
     }
   };

@@ -1,19 +1,20 @@
 import UserDisplay from '../components/UserDisplay';
-import {useEffect} from 'react';
+import {useEffect, useState} from 'react';
 import {useUser} from '../hooks/useUser'; //import the useUser context
+import UserProfileUpdate from '../components/UserProfileUpdate';
 
-const UserPage = () => {
-  // testing the propped context by destructuing the function we need here
+const UserPage = ({showUpdate, setShowUpdate}) => {
   const {setPageTitle} = useUser();
-  // and calling it in the useEffect function below
+
+  // calling the page title update
   useEffect(() => {
     setPageTitle('Job Seekers Area');
   }, []);
+
   return (
     <>
-      <h1>Users Page TL</h1>
-      <br />
-      <UserDisplay></UserDisplay>
+      {!showUpdate && <UserDisplay />}
+      {showUpdate && <UserProfileUpdate setShowUpdate={setShowUpdate} />}
     </>
   );
 };

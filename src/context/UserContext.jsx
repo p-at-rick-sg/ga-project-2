@@ -10,7 +10,11 @@ const logout = () => {
 
 export function UserProvider({children}) {
   //set the UserContext values and adding to an object here for clarity
-  const [user, setUser] = useState({email: 'patrick.kittle@gmail.com', name: null});
+  const [user, setUser] = useState({
+    email: null,
+    name: null,
+    airtableId: null,
+  });
   const [authenticated, setAuthenticated] = useState(false);
   const [pageTitle, setPageTitle] = useState('');
   const BASEURI = 'https://api.airtable.com/v0/';
