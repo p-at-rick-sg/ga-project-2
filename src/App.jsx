@@ -27,7 +27,7 @@ function App() {
           setShowUpdate={setShowUpdate}
           showUpdate={showUpdate}></NavBar>
         <Routes>
-          <Route path="/" element={<Navigate to="home" />} />
+          <Route path="/" element={<Navigate to="/home" />} />
           <Route path="home" element={<LandingPage />} />
           <Route path="signin" element={<Navigate to="/user" />} />
           <Route

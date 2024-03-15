@@ -4,11 +4,19 @@ import {createTheme} from '@mui/material';
 export const UserContext = createContext();
 const defaultTheme = createTheme();
 
-const logout = () => {
-  setUser(null);
-};
-
 export function UserProvider({children}) {
+  const logout = () => {
+    console.log('logging out function');
+    sessionStorage.removeItem('user');
+    setUser({
+      email: null,
+      name: null,
+      airtableId: null,
+      firstName: null,
+      primaryLocation: null,
+    });
+    setAuthenticated(false);
+  };
   //set the UserContext values and adding to an object here for clarity
   const [user, setUser] = useState({
     email: null,

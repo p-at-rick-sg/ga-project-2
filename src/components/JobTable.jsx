@@ -1,58 +1,68 @@
+import {useState, useEffect} from 'react';
+
 import {DataGrid} from '@mui/x-data-grid';
 import Paper from '@mui/material/Paper';
-import {Box, Typography} from '@mui/material';
+import {Box, Button, Typography, FormControl} from '@mui/material';
 
 const columns = [
-  {field: 'id', headerName: 'ID', width: 70},
-  {field: 'firstName', headerName: 'First name', width: 130},
-  {field: 'lastName', headerName: 'Last name', width: 130},
-  {
-    field: 'age',
-    headerName: 'Age',
-    type: 'number',
-    width: 90,
-  },
-  {
-    field: 'fullName',
-    headerName: 'Full name',
-    description: 'This column has a value getter and is not sortable.',
-    sortable: false,
-    width: 160,
-    valueGetter: params => `${params.row.firstName || ''} ${params.row.lastName || ''}`,
-  },
+  {field: 'company', headerName: 'Company', width: 175},
+  {field: 'jobTitle', headerName: 'Job Title', width: 250},
+  {field: 'postedDate', headerName: 'Posted On', width: 150},
 ];
 
-const rows = [
-  {id: 1, lastName: 'Snow', firstName: 'Jon', age: 35},
-  {id: 2, lastName: 'Lannister', firstName: 'Cersei', age: 42},
-  {id: 3, lastName: 'Lannister', firstName: 'Jaime', age: 45},
-  {id: 4, lastName: 'Stark', firstName: 'Arya', age: 16},
-  {id: 5, lastName: 'Targaryen', firstName: 'Daenerys', age: null},
-  {id: 6, lastName: 'Melisandre', firstName: null, age: 150},
-  {id: 7, lastName: 'Clifford', firstName: 'Ferrara', age: 44},
-  {id: 8, lastName: 'Frances', firstName: 'Rossini', age: 36},
-  {id: 9, lastName: 'Roxie', firstName: 'Harvey', age: 65},
-];
+const JobTable = ({jobs, selectedRows, setSelectedRows}) => {
+  const [rows, setRows] = useState();
 
-const JobTable = () => {
+  const buildTableData = () => {
+    const tempRows = [];
+    for (const job of jobs) {
+      const newRow = {};
+      for (const [key, value] of Object.entries(job)) {
+        if (key === 'postedDate') {
+          const date = new Date(job.postedDate.seconds * 1000).toLocaleDateString();
+          newRow[key] = date;
+        } else {
+          newRow[key] = value;
+        }
+      }
+      tempRows.push(newRow);
+    }
+    setRows(tempRows);
+  };
+  // console.log(jobs);
+  useEffect(() => {
+    buildTableData();
+  }, [jobs]);
+
+  const handleClick = e => {
+    console.log(e);
+    console.log('selected item: ', selectedRows[0]);
+  };
+
   return (
     <div>
       <Paper elevation={2}>
         <Typography variant="h4" gutterBottom>
-          Jobs Listing
+          Jobs Matches
         </Typography>
-        <Box>
-          <DataGrid
-            rows={rows}
-            columns={columns}
-            initialState={{
-              pagination: {
-                paginationModel: {page: 0, pageSize: 5},
-              },
-            }}
-            pageSizeOptions={[5, 10]}
-            checkboxSelection
-          />
+        <Box component={FormControl}>
+          {rows && (
+            <DataGrid
+              rows={rows}
+              columns={columns}
+              initialState={{
+                pagination: {
+                  paginationModel: {page: 0, pageSize: 5},
+                },
+              }}
+              pageSizeOptions={[5, 10]}
+              checkboxSelection={false}
+              onRowSelectionModelChange={ids => {
+                setSelectedRows(ids);
+              }}
+            />
+          )}
+          <Button onClick={handleClick}>Change Location</Button>
         </Box>
       </Paper>
     </div>

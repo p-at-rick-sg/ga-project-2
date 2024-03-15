@@ -50,6 +50,16 @@ export default function SignIn() {
     return errors;
   };
 
+  const checkSession = () => {
+    if (sessionStorage.getItem('user') !== null) {
+      console.log('data in session storage, bypassing login');
+      const sessionData = JSON.parse(sessionStorage.getItem('user'));
+      console.log(sessionData);
+      setUser({email: sessionData.email, airtableId: sessionData.airtableId});
+      setAuthenticated(true);
+    }
+  };
+
   // the getuser function called to pull all the user records
   const getAllUsers = controller => {
     const signal = controller.signal;
@@ -69,7 +79,8 @@ export default function SignIn() {
 
   //pulling the full list of users
   useEffect(() => {
-    console.log('initial fetch users effect');
+    checkSession();
+    console.log('No local session data so resuming the initial fetch users effect');
     if (errors.length === 0 && submitting) {
       const controller = new AbortController();
       getAllUsers(controller.signal);
@@ -90,8 +101,11 @@ export default function SignIn() {
             console.log('password is OK');
             console.log(userRecord.id);
             setUser({email: creds.email, airtableId: userRecord.id});
+            // check and set local session storage
+            const sessionObj = {email: creds.email, airtableId: userRecord.id};
+            sessionStorage.setItem('user', JSON.stringify(sessionObj));
             setAuthenticated(true);
-            console.log('set useID to ', userRecord.id);
+            console.log('set userID to ', userRecord.id);
             break;
           } else console.log('incorrect password');
         } else console.log('incorrect username');

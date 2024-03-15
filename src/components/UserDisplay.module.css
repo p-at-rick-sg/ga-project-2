@@ -6,9 +6,6 @@
 }
 
 .rightDiv {
-  border: solid 1px red;
   margin-left: 70%;
   margin-top: 10px;
-  height: 200px;
-  background: lightgray;
 }

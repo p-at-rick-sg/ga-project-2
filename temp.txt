@@ -1,0 +1,46 @@
+{
+    "id": "rec861xSLSYZzzwbV",
+    "createdTime": "2024-03-02T06:37:59.000Z",
+    "fields": {
+        "primaryLocation": "singapore",
+        "firstName": "Patrick",
+        "role": "admin",
+        "email": "patrick.kittle@gmail.com",
+        "lastName": "Little",
+        "Status": "active",
+        "highestLevel": "ba",
+        "secondaryLocation": "uk",
+        "highestSubject": "computerScience",
+        "password": "Letmein123",
+        "Record ID": "rec861xSLSYZzzwbV"
+    }
+}
+
+
+JOB STRUCTURE
+company
+"my company"
+(string)
+
+jobDescription
+"Basic JD"
+(string)
+
+jobTitle
+"executive"
+(string)
+
+location
+"singapore"
+(string)
+
+postedDate
+14 March 2024 at 13:15:20 UTC+8
+(timestamp)
+
+recruiterId
+"1234"
+(string)
+
+status
+"draft"
