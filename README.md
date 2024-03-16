@@ -56,7 +56,8 @@ Wireframes Link: TBC - Again I canont make public without user signin - to check
 
 *Landing Page*
 
-!{alt text}(https://github.com/p-at-rick-sg/ga-project-2/blob/main/documentation/Landing%20Page.png)
+![Landing Page](https://github.com/p-at-rick-sg/ga-project-2/assets/143236703/2d16d993-c301-4b18-ab52-d7e698d2168e)
+
 
 
 
