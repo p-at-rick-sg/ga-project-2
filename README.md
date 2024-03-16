@@ -1,7 +1,7 @@
 # ga-project-2 - Patrick Kittle
  React Front End Project
 
-**Recruitment Web Site - Fairplay**
+**Recruitment Web Site - JobFinder**
 I have chosen to create a recruitment portal app for my project 2. 
 
 *Overview*
@@ -42,12 +42,26 @@ Requirements Met:
 - Airtable via API/Fetch Syntax
 
 *Additional Technologies Used*
-Google Auth
+Google Auth - Not Deployed 
 Material UI
-STRETCH: Firebase (TBC)
+STRETCH: Firebase - Used for the Jobs posting only 
 STRETCH: Adzuna API (to pull public job postings into the site to drive traffic)
 
 **Important Links**
-Kanban Board Link: Check as I cannot make this public without paying
+Jira Board Link: https://patrickkittle.atlassian.net/jira/software/projects/GAP2/boards/1
 Live Site Link: TBC
 Wireframes Link: TBC - Again I canont make public without user signin - to check on that
+
+**Screen Shots**
+
+*Landing Page*
+
+!{alt text}(https://github.com/p-at-rick-sg/ga-project-2/blob/main/documentation/Landing%20Page.png)
+
+
+
+
+
+
+
+
