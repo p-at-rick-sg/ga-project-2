@@ -19,8 +19,7 @@ import {initializeApp} from 'firebase/app';
 import {getFirestore} from 'firebase/firestore';
 import {collection, query, where, doc, setDoc, addDoc, getDocs} from 'firebase/firestore';
 
-// TODO: Add SDKs for Firebase products that you want to use
-// https://firebase.google.com/docs/web/setup#available-libraries
+import {db} from '../firebase/config';
 
 const UserDisplay = () => {
   const {defaultTheme, BASEURI, BASEID, TABLEID, authenticated, setAuthenticated, setUser, user} =
@@ -47,49 +46,6 @@ const UserDisplay = () => {
     const fullURI = BASEURI + BASEID + TABLEID + '/' + USERID;
     fetchUser(fullURI, myRequestOptions);
   };
-
-  // ******* FIREBASE CONFIG *******
-  // Your web app's Firebase configuration
-  const firebaseConfig = {
-    apiKey: import.meta.env.VITE_FBAPIKEY,
-    authDomain: import.meta.env.VITE_FBAUTHDOM,
-    projectId: 'ga-project-2-d64a9',
-    storageBucket: 'ga-project-2-d64a9.appspot.com',
-    messagingSenderId: '798703869466',
-    appId: '1:798703869466:web:90dce310155e0f234cbba3',
-    measurementId: 'G-MNCE84146G',
-  };
-  // Initialize Firebase
-  const app = initializeApp(firebaseConfig);
-  const db = getFirestore(app);
-  //  ******** END FIREBASE CONFIG ********
-
-  // ******* Start Firebase Firestore Add records
-  // const testFirestore2 = async () => {
-  //   try {
-  //     const docRef = await addDoc(collection(db, 'users'), {
-  //       first: 'Alan',
-  //       middle: 'Mathison',
-  //       last: 'Turing',
-  //       born: 1912,
-  //     });
-
-  //     console.log('Document written with ID: ', docRef.id);
-  //   } catch (e) {
-  //     console.error('Error adding document: ', e);
-  //   }
-  // };
-
-  //GETTING JOBS DATA FROM THE DB
-  // const getFirebaseData = async () => {
-  //   const jobs = [];
-  //   const querySnapshot = await getDocs(collection(db, 'jobs'));
-  //   querySnapshot.forEach(doc => {
-  //     jobs.push({id: doc.id, ...doc.data()});
-  //   });
-  //   setJobs(jobs);
-  // };
-  //  ******* End Firestore Testing ********
 
   useEffect(() => {
     queryFirebaseJobs();

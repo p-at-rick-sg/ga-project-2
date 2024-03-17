@@ -6,7 +6,6 @@ const JobDetails = ({jobs, selectedRows}) => {
   const [currentJob, setCurrentJob] = useState({});
 
   const selectJob = () => {
-    console.log('blblbl', currentJob);
     for (const job of jobs) {
       if (job.id === selectedRows[0]) {
         setCurrentJob(job);
@@ -38,7 +37,16 @@ const JobDetails = ({jobs, selectedRows}) => {
         </Card>
       </>
     );
-  }
+  } else
+    return (
+      <>
+        <Card variant="outlined">
+          <Typography variant="h5" gutterBottom>
+            No Job Selected
+          </Typography>
+        </Card>
+      </>
+    );
 };
 
 export default JobDetails;

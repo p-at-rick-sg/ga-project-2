@@ -1,15 +1,27 @@
 import {useEffect} from 'react';
 import {useUser} from '../hooks/useUser'; //import the useUser context
+import RecruiterDisplay from '../components/RecruiterDisplay';
+import {useFirestore} from '../hooks/useFirestore';
 
 const RecruiterPage = () => {
-  // testing the propped context by destructuing the function we need here
+  //Set NavBar Ttile
   const {setPageTitle} = useUser();
-  // and calling it in the useEffect function below
   useEffect(() => {
     setPageTitle('Recruiters Area');
   }, []);
 
-  return <div>Recruiters Page TL</div>;
+  const {documents: jobs} = useFirestore('jobs');
+  console.log(jobs);
+  return (
+    <div>
+      Recruiters Page TL
+      {jobs &&
+        jobs.map((job, idx) => {
+          return <p>{job.jobTitle} </p>;
+        })}
+      <RecruiterDisplay />
+    </div>
+  );
 };
 
 export default RecruiterPage;
