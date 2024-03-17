@@ -15,21 +15,18 @@ const JobTable = ({jobs, selectedRows, setSelectedRows}) => {
 
   const buildTableData = () => {
     const tempRows = [];
-    for (const job of jobs) {
-      const newRow = {};
-      for (const [key, value] of Object.entries(job)) {
-        if (key === 'postedDate') {
-          const date = new Date(job.postedDate.seconds * 1000).toLocaleDateString();
-          newRow[key] = date;
-        } else {
-          newRow[key] = value;
-        }
-      }
-      tempRows.push(newRow);
-    }
+
+    jobs.forEach(job => {
+      const date = new Date(job.postedDate.seconds * 1000).toLocaleDateString();
+      const updatededRow = {
+        ...job,
+        postedDate: date,
+      };
+      tempRows.push(updatededRow);
+    });
     setRows(tempRows);
   };
-  // console.log(jobs);
+
   useEffect(() => {
     buildTableData();
   }, [jobs]);

@@ -11,7 +11,6 @@ const RecruiterPage = () => {
   }, []);
 
   const {documents: jobs} = useFirestore('jobs');
-  console.log(jobs);
   return (
     <div>
       Recruiters Page TL

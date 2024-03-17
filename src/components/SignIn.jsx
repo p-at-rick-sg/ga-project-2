@@ -80,7 +80,6 @@ export default function SignIn() {
   //pulling the full list of users
   useEffect(() => {
     checkSession();
-    console.log('No local session data so resuming the initial fetch users effect');
     if (errors.length === 0 && submitting) {
       const controller = new AbortController();
       getAllUsers(controller.signal);
@@ -95,17 +94,13 @@ export default function SignIn() {
   useEffect(() => {
     if (users.length !== 0) {
       for (const userRecord of users.records) {
-        console.log(userRecord.fields.email);
         if (userRecord.fields.email.toLowerCase() === creds.email.toLowerCase()) {
           if (userRecord.fields.password === creds.password) {
-            console.log('password is OK');
-            console.log(userRecord.id);
             setUser({email: creds.email, airtableId: userRecord.id});
             // check and set local session storage
             const sessionObj = {email: creds.email, airtableId: userRecord.id};
             sessionStorage.setItem('user', JSON.stringify(sessionObj));
             setAuthenticated(true);
-            console.log('set userID to ', userRecord.id);
             break;
           } else console.log('incorrect password');
         } else console.log('incorrect username');

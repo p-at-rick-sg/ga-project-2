@@ -20,6 +20,7 @@ import {getFirestore} from 'firebase/firestore';
 import {collection, query, where, doc, setDoc, addDoc, getDocs} from 'firebase/firestore';
 
 import {db} from '../firebase/config';
+import {useFirestore} from '../hooks/useFirestore';
 
 const UserDisplay = () => {
   const {defaultTheme, BASEURI, BASEID, TABLEID, authenticated, setAuthenticated, setUser, user} =
@@ -27,7 +28,7 @@ const UserDisplay = () => {
   const bearer = import.meta.env.VITE_AIRTABLEPAT;
   const USERID = user.airtableId;
   const [loggedInUser, fetchUser] = useFetch();
-  const [jobs, setJobs] = useState([]);
+  // const [jobs, setJobs] = useState([]);
   const [userSaved, setUserSaved] = useState(false);
   const [selectedRows, setSelectedRows] = useState([]);
 
@@ -45,22 +46,6 @@ const UserDisplay = () => {
     };
     const fullURI = BASEURI + BASEID + TABLEID + '/' + USERID;
     fetchUser(fullURI, myRequestOptions);
-  };
-
-  useEffect(() => {
-    queryFirebaseJobs();
-  }, []);
-
-  const queryFirebaseJobs = async () => {
-    const tempJobs = [];
-    const jobsRef = collection(db, 'jobs');
-    const q = query(jobsRef, where('location', '==', 'Singapore'));
-    const querySnapshot = await getDocs(q);
-    querySnapshot.forEach(doc => {
-      // console.log(doc.id, ' => ', doc.data());
-      tempJobs.push({id: doc.id, ...doc.data()});
-    });
-    setJobs(tempJobs);
   };
 
   useEffect(() => {
@@ -87,6 +72,26 @@ const UserDisplay = () => {
     }
   }, [loggedInUser]);
 
+  // Original Firebase Lookup
+  // useEffect(() => {
+  //   queryFirebaseJobs();
+  // }, []);
+
+  // const queryFirebaseJobs = async () => {
+  //   const tempJobs = [];
+  //   const jobsRef = collection(db, 'jobs');
+  //   const q = query(jobsRef, where('location', '==', 'Singapore'));
+  //   const querySnapshot = await getDocs(q);
+  //   querySnapshot.forEach(doc => {
+  //     // console.log(doc.id, ' => ', doc.data());
+  //     tempJobs.push({id: doc.id, ...doc.data()});
+  //   });
+  //   setJobs(tempJobs);
+  // };
+
+  // New firestore hook lookup
+  const {documents: jobs} = useFirestore('jobs');
+
   return (
     <ThemeProvider theme={defaultTheme}>
       <Grid container direction="row" sx={{marginTop: 2}}>
@@ -98,13 +103,15 @@ const UserDisplay = () => {
 
       <div>
         <div className={styles.leftDiv}>
-          <JobTable
-            jobs={jobs}
-            setSelectedRows={setSelectedRows}
-            selectedRows={selectedRows}></JobTable>
+          {jobs && (
+            <JobTable
+              jobs={jobs}
+              setSelectedRows={setSelectedRows}
+              selectedRows={selectedRows}></JobTable>
+          )}
         </div>
         <div className={styles.rightDiv}>
-          <JobDetails jobs={jobs} selectedRows={selectedRows} />
+          {jobs && <JobDetails jobs={jobs} selectedRows={selectedRows} />}
         </div>
       </div>
     </ThemeProvider>
