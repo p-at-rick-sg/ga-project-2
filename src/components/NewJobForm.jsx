@@ -1,4 +1,5 @@
 import {useState} from 'react';
+import Footer from './Footer';
 
 //MUI
 import {ThemeProvider} from '@mui/material/styles';
@@ -6,10 +7,8 @@ import Button from '@mui/material/Button';
 import CssBaseline from '@mui/material/CssBaseline';
 import TextField from '@mui/material/TextField';
 import FormControlLabel from '@mui/material/FormControlLabel';
-import Checkbox from '@mui/material/Checkbox';
 import Grid from '@mui/material/Grid';
-import Box from '@mui/material/Box';
-import {InputLabel, Select, MenuItem} from '@mui/material';
+import {InputLabel, Select, MenuItem, Box, Checkbox} from '@mui/material';
 import Typography from '@mui/material/Typography';
 import Container from '@mui/material/Container';
 
@@ -188,6 +187,7 @@ const NewJobForm = () => {
             </Box>
           </Box>
         </Container>
+        <Footer />
       </ThemeProvider>
     </div>
   );

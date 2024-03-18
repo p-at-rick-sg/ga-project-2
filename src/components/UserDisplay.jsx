@@ -9,11 +9,11 @@ import JobDetails from './JobDetails';
 
 import Grid from '@mui/material/Grid';
 import Typography from '@mui/material/Typography';
-import Container from '@mui/material/Container';
 import {ThemeProvider} from '@mui/material/styles';
 
 import {db} from '../firebase/config';
 import {useFirestore} from '../hooks/useFirestore';
+import Footer from './Footer';
 
 const UserDisplay = () => {
   const {defaultTheme, BASEURI, BASEID, TABLEID, authenticated, setAuthenticated, setUser, user} =
@@ -90,6 +90,11 @@ const UserDisplay = () => {
           {jobs && <JobDetails jobs={jobs} selectedRows={selectedRows} />}
         </div>
       </div>
+      <Grid container direction="column" sx={{marginTop: 2}}>
+        <Grid item sm={12} md={12}>
+          <Footer />
+        </Grid>
+      </Grid>
     </ThemeProvider>
   );
 };

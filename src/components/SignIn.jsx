@@ -15,19 +15,7 @@ import {useUser} from '../hooks/useUser';
 import {NavLink} from 'react-router-dom';
 import {useState, useEffect} from 'react';
 import useFetch from '../hooks/useFetch';
-
-function Copyright(props) {
-  return (
-    <Typography variant="body2" color="text.secondary" align="center" {...props}>
-      {'Copyright © '}
-      <Link color="inherit" href="https://mui.com/">
-        Patrick Kittle
-      </Link>{' '}
-      {new Date().getFullYear()}
-      {'.'}
-    </Typography>
-  );
-}
+import Footer from './Footer';
 
 export default function SignIn() {
   const {defaultTheme, BASEURI, BASEID, TABLEID, authenticated, setAuthenticated, setUser} =
@@ -186,8 +174,8 @@ export default function SignIn() {
             </Grid>
           </Box>
         </Box>
-        <Copyright sx={{mt: 8, mb: 4}} />
       </Container>
+      <Footer />
     </ThemeProvider>
   );
 }

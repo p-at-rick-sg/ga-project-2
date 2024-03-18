@@ -16,19 +16,7 @@ import {useState} from 'react';
 import {useRecruiter} from '../hooks/useRecruiter';
 import {useSignin} from '../hooks/useSignin';
 import {useNavigate} from 'react-router-dom';
-
-function Copyright(props) {
-  return (
-    <Typography variant="body2" color="text.secondary" align="center" {...props}>
-      {'Copyright © '}
-      <Link color="inherit" href="https://github.com/p-at-rick-sg">
-        Patrick Kittle
-      </Link>{' '}
-      {new Date().getFullYear()}
-      {'.'}
-    </Typography>
-  );
-}
+import Footer from './Footer';
 
 const RecruiterSignin = () => {
   const {recruiterTheme} = useRecruiter();
@@ -109,8 +97,8 @@ const RecruiterSignin = () => {
             </Grid>
           </Box>
         </Box>
-        <Copyright sx={{mt: 8, mb: 4}} />
       </Container>
+      <Footer />
     </ThemeProvider>
   );
 };

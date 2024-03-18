@@ -20,19 +20,6 @@ import {NavLink} from 'react-router-dom';
 import {useSignup} from '../hooks/useSignup';
 import Footer from './Footer';
 
-function Copyright(props) {
-  return (
-    <Typography variant="body2" color="text.secondary" align="center" {...props}>
-      {'Copyright © '}
-      <Link color="inherit" href="https://github.com/p-at-rick-sg">
-        Patrick Kittle
-      </Link>{' '}
-      {new Date().getFullYear()}
-      {'.'}
-    </Typography>
-  );
-}
-
 const RecruiterSignup = () => {
   const {recruiterTheme} = useRecruiter();
   //bring in the signup hook function
@@ -188,9 +175,7 @@ const RecruiterSignup = () => {
               )}
               {error && (
                 <Grid>
-                  <div>
-                    User Already Exists - <NavLink to="/signin">Login</NavLink>
-                  </div>
+                  User Already Exists - <NavLink to="/signin">Login</NavLink>
                 </Grid>
               )}
               <Button
@@ -203,16 +188,13 @@ const RecruiterSignup = () => {
               </Button>
 
               <Grid container justifyContent="flex-end">
-                <Grid item>
-                  <Link href="signin" variant="body2">
-                    <NavLink to="#">Already have an account? Sign in Here</NavLink>
-                  </Link>
+                <Grid item component={NavLink} to="/recruiter-signin">
+                  Already have an account? Sign in Here
                 </Grid>
               </Grid>
             </Box>
           </Box>
         </Container>
-        {/* footer stuff I will move to a new component */}
         <Footer />
       </ThemeProvider>
     </div>

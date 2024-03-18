@@ -15,19 +15,8 @@ import {ThemeProvider} from '@mui/material/styles';
 import {useUser} from '../hooks/useUser';
 import useFetch from '../hooks/useFetch';
 import {NavLink} from 'react-router-dom';
-
-function Copyright(props) {
-  return (
-    <Typography variant="body2" color="text.secondary" align="center" {...props}>
-      {'Copyright © '}
-      <Link color="inherit" href="https://mui.com/">
-        Patrick Kittle
-      </Link>{' '}
-      {new Date().getFullYear()}
-      {'.'}
-    </Typography>
-  );
-}
+import {useNavigate} from 'react-router-dom';
+import Footer from './Footer';
 
 export default function SignUp() {
   const {defaultTheme, BASEURI, BASEID, TABLEID} = useUser();
@@ -44,7 +33,7 @@ export default function SignUp() {
   });
   const [errors, setErrors] = useState({});
   const [submitting, setSubmitting] = useState(false);
-
+  const navigate = useNavigate();
   const validateValues = inputValues => {
     let errors = {};
     if (inputValues.email.length < 5) {
@@ -124,7 +113,8 @@ export default function SignUp() {
     if (addUser) {
       const controller = new AbortController();
       insertUser(controller.signal);
-
+      //testing a redirect here
+      navigate('/signin');
       return () => {
         controller.abort();
       };
@@ -277,8 +267,8 @@ export default function SignUp() {
               </Grid>
             </Box>
           </Box>
-          <Copyright sx={{mt: 5}} />
         </Container>
+        <Footer />
       </ThemeProvider>
     );
   } else
@@ -301,6 +291,7 @@ export default function SignUp() {
             </Typography>
           </Box>
         </Container>
+        <Footer />
       </ThemeProvider>
     );
 }
