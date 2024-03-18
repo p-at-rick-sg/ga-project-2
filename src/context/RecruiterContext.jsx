@@ -1,34 +1,42 @@
 import {createContext, useReducer, useEffect} from 'react';
+import {createTheme} from '@mui/material';
 import {auth} from '../firebase/config';
 import {onAuthStateChanged} from 'firebase/auth';
 
 export const RecruiterContext = createContext();
+const recruiterTheme = createTheme();
 
 export const authReducer = (state, action) => {
   switch (action.type) {
     case 'LOGIN':
-      return {...state, user: action.payload};
+      return {...state, recUser: action.payload};
     case 'LOGOUT':
-      return {...state, user: null};
+      return {...state, recUser: null};
     case 'AUTH_IS_READY':
-      return {user: action.payload, authIsReady: true};
+      return {recUser: action.payload, authIsReady: true};
     default:
       return state;
   }
 };
 
-export const AuthContectProvider = ({children}) => {
+export const RecruiterProvider = ({children}) => {
   const [state, dispatch] = useReducer(authReducer, {
-    user: null,
+    recUser: null,
     authIsReady: false,
   });
 
   useEffect(() => {
-    const unsub = onAuthStateChanged(auth, user => {
-      dispatch({type: 'AUTH_IS_READY', payloafd: user});
+    const unsub = onAuthStateChanged(auth, recUser => {
+      dispatch({type: 'AUTH_IS_READY', payload: recUser});
       unsub();
     });
   }, []);
 
-  return <RecruitContextProvider value={{...state, dispatch}}>{children}</RecruitContextProvider>;
+  const value = {
+    recruiterTheme,
+    ...state,
+    dispatch,
+  };
+
+  return <RecruiterContext.Provider value={value}>{children}</RecruiterContext.Provider>;
 };

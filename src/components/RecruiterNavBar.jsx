@@ -1,15 +1,20 @@
 import styles from './NavBar.module.css';
 import {NavLink, Link} from 'react-router-dom';
+
+//hook & context imports
 import {useUser} from '../hooks/useUser';
+import {useLogout} from '../hooks/useLogout';
 
 //MUI Imports
 import {AppBar, Box, Button, Toolbar, Typography, IconButton, CssBaseline} from '@mui/material';
 import MenuIcon from '@mui/icons-material/Menu';
 import AccountCircle from '@mui/icons-material/AccountCircle';
 import {Fragment} from 'react';
+import {useRecruiter} from '../hooks/useRecruiter';
 
 const NavBar = ({setShowUpdate, showUpdate}) => {
-  const {user, pageTitle, logout} = useUser();
+  const {recUser, pageTitle} = useRecruiter();
+  const {logout} = useLogout();
 
   const handleClick = () => {
     if (showUpdate) setShowUpdate(false);
@@ -18,6 +23,7 @@ const NavBar = ({setShowUpdate, showUpdate}) => {
 
   return (
     <Fragment>
+      {recUser.email}
       <CssBaseline />
       <Box sx={{flexgrow: 1}}>
         <AppBar position="static">
@@ -30,34 +36,28 @@ const NavBar = ({setShowUpdate, showUpdate}) => {
               sx={{mr: 2}}
               component={NavLink}
               to="/home">
-              {/* <MenuIcon /> */} JobFinder
+              JobFinder
             </IconButton>
             <Typography variant="h6" component="div" sx={{flexGrow: 1}}>
               {pageTitle && pageTitle}
             </Typography>
-            {!user.email && (
+
+            {recUser && (
+              <Button color="inherit" component={NavLink} to="/recruiter-display">
+                Recruitment Area
+              </Button>
+            )}
+            {!recUser && (
               <Button color="inherit" component={NavLink} to="signin">
                 Login
               </Button>
             )}
-            {user.email && (
-              <Button color="inherit" component={NavLink} to="home" onClick={logout}>
+            {recUser && (
+              <Button color="inherit" onClick={logout} component={NavLink} to="home">
                 Logout
               </Button>
             )}
-            {user.email && (
-              <Button color="inherit" component={NavLink} to="user">
-                User Area
-              </Button>
-            )}
-            {!user.email && (
-              <Button color="inherit" component={NavLink} to="signup">
-                Sign Up
-              </Button>
-            )}
-            {user.email && (
-              <AccountCircle onClick={handleClick} sx={{fontSize: 40, marginLeft: 5}} />
-            )}
+            {recUser && <AccountCircle onClick={handleClick} sx={{fontSize: 40, marginLeft: 5}} />}
           </Toolbar>
         </AppBar>
       </Box>

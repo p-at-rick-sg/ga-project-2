@@ -11,13 +11,16 @@ import '@fontsource/roboto/700.css';
 
 //context imports
 import {UserProvider} from './context/UserContext.jsx';
+import {RecruiterProvider} from './context/RecruiterContext.jsx';
 
 ReactDOM.createRoot(document.getElementById('root')).render(
   <React.StrictMode>
     <UserProvider>
-      <BrowserRouter>
-        <App />
-      </BrowserRouter>
+      <RecruiterProvider>
+        <BrowserRouter>
+          <App />
+        </BrowserRouter>
+      </RecruiterProvider>
     </UserProvider>
   </React.StrictMode>
 );

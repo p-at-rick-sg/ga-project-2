@@ -44,3 +44,31 @@ recruiterId
 
 status
 "draft"
+
+Firebase auth user object:
+
+{
+    "uid": "Lw3au8RhYfbBUUPuVytff5mt7Bq1",
+    "email": "date@email.com",
+    "emailVerified": false,
+    "isAnonymous": false,
+    "providerData": [
+        {
+            "providerId": "password",
+            "uid": "date@email.com",
+            "displayName": null,
+            "email": "date@email.com",
+            "phoneNumber": null,
+            "photoURL": null
+        }
+    ],
+    "stsTokenManager": {
+        "refreshToken": "AMf-vBxcmDlDd463PVzCagQ4eCnB_7w6qZIerNBGKxgsPHLGXcjq8YO5Eb9lqy008wgNvuhPlQK--fHtGwZDZ59qbnBs5ymxALDCTJPFhTxjnjwWxTTyfBzLhDOz7MsKi88PyADrPd5h_thk00PqGNc3fIU7WiflsNGy5BT1StISlICGd1iETBKO1OHXH3dzaMbLD8zMmM0ykBim5lCg9XoA4Q7O3LhDxA",
+        "accessToken": "eyJhbGciOiJSUzI1NiIsImtpZCI6ImViYzIwNzkzNTQ1NzExODNkNzFjZWJlZDI5YzU1YmVmMjdhZDJjY2IiLCJ0eXAiOiJKV1QifQ.eyJpc3MiOiJodHRwczovL3NlY3VyZXRva2VuLmdvb2dsZS5jb20vZ2EtcHJvamVjdC0yLWQ2NGE5IiwiYXVkIjoiZ2EtcHJvamVjdC0yLWQ2NGE5IiwiYXV0aF90aW1lIjoxNzEwNzI5NDk1LCJ1c2VyX2lkIjoiTHczYXU4UmhZZmJCVVVQdVZ5dGZmNW10N0JxMSIsInN1YiI6Ikx3M2F1OFJoWWZiQlVVUHVWeXRmZjVtdDdCcTEiLCJpYXQiOjE3MTA3MzI4MTQsImV4cCI6MTcxMDczNjQxNCwiZW1haWwiOiJkYXRlQGVtYWlsLmNvbSIsImVtYWlsX3ZlcmlmaWVkIjpmYWxzZSwiZmlyZWJhc2UiOnsiaWRlbnRpdGllcyI6eyJlbWFpbCI6WyJkYXRlQGVtYWlsLmNvbSJdfSwic2lnbl9pbl9wcm92aWRlciI6InBhc3N3b3JkIn19.GjOPzEdy7cPZR3RPePXfTrYDaoGFlh21_5OYgsrKV6wDVLJGupZ10QEJvmNj3z0Zp9OwKxSy1ibATdJzhiMXnALrf_QRjjBO1PRiBus_qXmE5Mx9x-T7qgJ7mxW97Ie42eFgBgxr7THGhO-zVL6UHMzFt-y3m943IEqHlFJGCnFBJJD28IaA60VIF726M6BdonMdaqjH8gYqDJBfQpF8eTyRMSL2IJmhtujLRxYhlBkrm5omC_1IE0aEigD1TfnPZ-w2DRrxSEVYTWNRErT5_mX7tH75E6ir3K2SDLSQMZRehr0_dw3Vj5gNcp8XdMxvz0AXm8sPR41zuFnXeAF5MA",
+        "expirationTime": 1710736414668
+    },
+    "createdAt": "1710729494957",
+    "lastLoginAt": "1710729494957",
+    "apiKey": "AIzaSyCQFa0fQR9Gof55mA5WXuPffxpE24Clcm8",
+    "appName": "[DEFAULT]"
+}

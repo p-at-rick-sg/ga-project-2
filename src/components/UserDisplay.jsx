@@ -7,17 +7,10 @@ import JobDetails from './JobDetails';
 
 // MUI Imports
 
-import CssBaseline from '@mui/material/CssBaseline';
-import Paper from '@mui/material/Paper';
-import Box from '@mui/material/Box';
 import Grid from '@mui/material/Grid';
 import Typography from '@mui/material/Typography';
 import Container from '@mui/material/Container';
 import {ThemeProvider} from '@mui/material/styles';
-// Import the functions you need from the SDKs you need FIREBASE
-import {initializeApp} from 'firebase/app';
-import {getFirestore} from 'firebase/firestore';
-import {collection, query, where, doc, setDoc, addDoc, getDocs} from 'firebase/firestore';
 
 import {db} from '../firebase/config';
 import {useFirestore} from '../hooks/useFirestore';
@@ -71,23 +64,6 @@ const UserDisplay = () => {
       setUserSaved(true);
     }
   }, [loggedInUser]);
-
-  // Original Firebase Lookup
-  // useEffect(() => {
-  //   queryFirebaseJobs();
-  // }, []);
-
-  // const queryFirebaseJobs = async () => {
-  //   const tempJobs = [];
-  //   const jobsRef = collection(db, 'jobs');
-  //   const q = query(jobsRef, where('location', '==', 'Singapore'));
-  //   const querySnapshot = await getDocs(q);
-  //   querySnapshot.forEach(doc => {
-  //     // console.log(doc.id, ' => ', doc.data());
-  //     tempJobs.push({id: doc.id, ...doc.data()});
-  //   });
-  //   setJobs(tempJobs);
-  // };
 
   // New firestore hook lookup
   const {documents: jobs} = useFirestore('jobs');

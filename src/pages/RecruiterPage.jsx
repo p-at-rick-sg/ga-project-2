@@ -1,5 +1,9 @@
 import {useEffect} from 'react';
+
+//contect imports
 import {useUser} from '../hooks/useUser'; //import the useUser context
+import {useRecruiter} from '../hooks/useRecruiter';
+
 import RecruiterDisplay from '../components/RecruiterDisplay';
 import {useFirestore} from '../hooks/useFirestore';
 
@@ -14,10 +18,6 @@ const RecruiterPage = () => {
   return (
     <div>
       Recruiters Page TL
-      {jobs &&
-        jobs.map((job, idx) => {
-          return <p>{job.jobTitle} </p>;
-        })}
       <RecruiterDisplay />
     </div>
   );
