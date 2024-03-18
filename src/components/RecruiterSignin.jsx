@@ -63,7 +63,7 @@ const RecruiterSignin = () => {
             <LockOutlinedIcon />
           </Avatar>
           <Typography component="h1" variant="h5">
-            Sign in
+            Recruiter/Company Sign-in
           </Typography>
           <Box component="form" onSubmit={handleSubmit} noValidate sx={{mt: 1}}>
             <TextField
@@ -103,7 +103,7 @@ const RecruiterSignin = () => {
               </Grid>
               <Grid item>
                 <Link variant="body2">
-                  <NavLink to="/signup">{"Don't have an account? Sign Up"}</NavLink>
+                  <NavLink to="/recruiter-signup">{"Don't have an account? Sign Up"}</NavLink>
                 </Link>
               </Grid>
             </Grid>

@@ -40,6 +40,13 @@ const NavBar = ({setShowUpdate, showUpdate}) => {
                 Login
               </Button>
             )}
+
+            {!user.email && (
+              <Button color="error" component={NavLink} to="recruiter-signin">
+                Recruiter Login
+              </Button>
+            )}
+
             {user.email && (
               <Button color="inherit" component={NavLink} to="home" onClick={logout}>
                 Logout

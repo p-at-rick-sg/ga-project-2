@@ -18,6 +18,7 @@ import FormControlLabel from '@mui/material/FormControlLabel';
 import Checkbox from '@mui/material/Checkbox';
 import {NavLink} from 'react-router-dom';
 import {useSignup} from '../hooks/useSignup';
+import Footer from './Footer';
 
 function Copyright(props) {
   return (
@@ -210,8 +211,9 @@ const RecruiterSignup = () => {
               </Grid>
             </Box>
           </Box>
-          <Copyright sx={{mt: 5}} />
         </Container>
+        {/* footer stuff I will move to a new component */}
+        <Footer />
       </ThemeProvider>
     </div>
   );

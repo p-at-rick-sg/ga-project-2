@@ -7,7 +7,6 @@ import {useLogout} from '../hooks/useLogout';
 
 //MUI Imports
 import {AppBar, Box, Button, Toolbar, Typography, IconButton, CssBaseline} from '@mui/material';
-import MenuIcon from '@mui/icons-material/Menu';
 import AccountCircle from '@mui/icons-material/AccountCircle';
 import {Fragment} from 'react';
 import {useRecruiter} from '../hooks/useRecruiter';
@@ -44,7 +43,7 @@ const NavBar = ({setShowUpdate, showUpdate}) => {
 
             {recUser && (
               <Button color="inherit" component={NavLink} to="/recruiter-display">
-                Recruitment Area
+                My Home
               </Button>
             )}
             {!recUser && (
@@ -52,12 +51,13 @@ const NavBar = ({setShowUpdate, showUpdate}) => {
                 Login
               </Button>
             )}
+
+            {recUser && <AccountCircle onClick={handleClick} sx={{fontSize: 40, marginLeft: 5}} />}
             {recUser && (
               <Button color="inherit" onClick={logout} component={NavLink} to="home">
                 Logout
               </Button>
             )}
-            {recUser && <AccountCircle onClick={handleClick} sx={{fontSize: 40, marginLeft: 5}} />}
           </Toolbar>
         </AppBar>
       </Box>

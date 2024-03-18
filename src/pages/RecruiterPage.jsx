@@ -14,10 +14,10 @@ const RecruiterPage = () => {
     setPageTitle('Recruiters Area');
   }, []);
 
-  const {documents: jobs} = useFirestore('jobs');
+  const {documents: jobs} = useFirestore('jobs'); //will use this to pull a list of jobs back
+
   return (
     <div>
-      Recruiters Page TL
       <RecruiterDisplay />
     </div>
   );

@@ -19,6 +19,7 @@ import SignUp from './components/SignUp';
 import RecruiterSignup from './components/RecruiterSignup';
 import RecruiterSignin from './components/RecruiterSignin';
 import {useRecruiter} from './hooks/useRecruiter';
+import NewJobForm from './components/NewJobForm';
 
 function App() {
   const {pageTitle, authenticated} = useUser();
@@ -69,6 +70,7 @@ function App() {
           <Route path="recruiter-signup" element={<RecruiterSignup />} />
           <Route path="recruiter-signin" element={<RecruiterSignin />} />
           <Route path="admin" element={<AdminPage />} />
+          <Route path="jobs" element={<NewJobForm />} />
           <Route path="*" element={<NotFoundPage />} />
         </Routes>
       </>
