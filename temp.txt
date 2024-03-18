@@ -69,6 +69,6 @@ Firebase auth user object:
     },
     "createdAt": "1710729494957",
     "lastLoginAt": "1710729494957",
-    "apiKey": "AIzaSyCQFa0fQR9Gof55mA5WXuPffxpE24Clcm8",
+    "apiKey": "",
     "appName": "[DEFAULT]"
 }
