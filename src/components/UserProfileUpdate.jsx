@@ -1,5 +1,5 @@
 import {useState, useEffect} from 'react';
-import Button from '@mui/material/Button';
+import {Button, CircularProgress} from '@mui/material';
 import CssBaseline from '@mui/material/CssBaseline';
 import TextField from '@mui/material/TextField';
 import FormControlLabel from '@mui/material/FormControlLabel';
@@ -33,9 +33,11 @@ export default function UserProfileUpdate({setShowUpdate}) {
   const [submitting, setSubmitting] = useState(false);
   const [updateValues, setUpdateValues] = useState({});
   const [showSuccess, setShowSuccess] = useState(false);
+  const [loading, setLoading] = useState(true);
 
   //update the existing user in Airtable
   const updateUser = controller => {
+    setLoading(true);
     const fullURI = BASEURI + BASEID + TABLEID + '/' + USERID;
 
     const signal = controller.signal;
@@ -63,7 +65,7 @@ export default function UserProfileUpdate({setShowUpdate}) {
       setShowSuccess(true);
       setTimeout(() => {
         setShowUpdate(false); //add a delay here later
-      }, 2000);
+      }, 1500);
     }
   }, [patchResponse]);
 
@@ -85,12 +87,13 @@ export default function UserProfileUpdate({setShowUpdate}) {
   };
 
   useEffect(() => {
-    console.log('initial fectch of the logged in users details from Airtable');
+    console.log('initial fetch of the logged in users details from Airtable');
+    setLoading(true);
     if (errors.length === 0) {
       console.log('past the check');
       const controller = new AbortController();
       getOneUser(controller.signal);
-
+      setLoading(false);
       return () => {
         controller.abort();
       };
@@ -105,6 +108,7 @@ export default function UserProfileUpdate({setShowUpdate}) {
         if (key in inputFields) inputFields[key] = value;
       }
     }
+    setLoading(false);
   }, [userDetails]);
 
   const validateValues = (first, last) => {
@@ -160,6 +164,7 @@ export default function UserProfileUpdate({setShowUpdate}) {
       <ThemeProvider theme={defaultTheme}>
         <Container component="main" maxWidth="md" sx={{mt: 4}}>
           <CssBaseline />
+          {loading && <CircularProgress />}
           <Box component="Form" noValidate onSubmit={handleSubmit}>
             <Grid container spacing={2}>
               <Grid item md={6}>

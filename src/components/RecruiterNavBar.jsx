@@ -22,7 +22,6 @@ const NavBar = ({setShowUpdate, showUpdate}) => {
 
   return (
     <Fragment>
-      {recUser.email}
       <CssBaseline />
       <Box sx={{flexgrow: 1}}>
         <AppBar position="static">

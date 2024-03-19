@@ -1,4 +1,4 @@
-import {useState} from 'react';
+import {useState, useEffect} from 'react';
 import {useRecruiter} from '../hooks/useRecruiter';
 import {useNavigate} from 'react-router-dom';
 
@@ -6,8 +6,7 @@ import {useNavigate} from 'react-router-dom';
 import {ThemeProvider} from '@mui/material';
 import {Container} from '@mui/material';
 import CssBaseline from '@mui/material/CssBaseline';
-import Box from '@mui/material/Box';
-import Link from '@mui/material/Link';
+import {Box, CircularProgress} from '@mui/material';
 import Grid from '@mui/material/Grid';
 import Avatar from '@mui/material/Avatar';
 import Button from '@mui/material/Button';
@@ -34,6 +33,7 @@ const RecruiterSignup = () => {
   const [errors, setErrors] = useState({});
   const [addUser, setAddUser] = useState(null);
   const navigate = useNavigate();
+  const [loading, setLoading] = useState(false);
 
   const validateValues = inputValues => {
     let errors = {};
@@ -50,15 +50,18 @@ const RecruiterSignup = () => {
   };
 
   const handleSubmit = e => {
+    setLoading(true);
     e.preventDefault();
     setErrors(validateValues(inputFields));
     const submitEmail = inputFields.email;
     const submitPassword = inputFields.password;
     if (Object.keys(errors).length === 0) {
-      console.log('submitting user signup');
       setAddUser(true);
       signup(submitEmail, submitPassword);
-      navigate('/recruiter-display');
+      setTimeout(() => {
+        navigate('/recruiter-display');
+      }, 1000);
+      setLoading(false);
     }
   };
 
@@ -84,6 +87,7 @@ const RecruiterSignup = () => {
             <Typography component="h1" variant="h5">
               Sign up as a Recruiter/Company User
             </Typography>
+            {loading && <CircularProgress />}
             <Box component="form" noValidate onSubmit={handleSubmit} sx={{mt: 3}}>
               <Grid container spacing={2}>
                 <Grid item xs={12} sm={6}>
