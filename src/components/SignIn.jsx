@@ -1,5 +1,5 @@
 import Avatar from '@mui/material/Avatar';
-import Button from '@mui/material/Button';
+import {Button, CircularProgress} from '@mui/material';
 import CssBaseline from '@mui/material/CssBaseline';
 import TextField from '@mui/material/TextField';
 import FormControlLabel from '@mui/material/FormControlLabel';
@@ -33,8 +33,10 @@ export default function SignIn() {
       if (inputValues.password.length < 8) {
         errors.push('Password is too short');
         console.log('password too short');
+        setSubmitting(false);
       }
     } else errors.push('Invalid Email Address');
+    setSubmitting(false);
     return errors;
   };
 
@@ -62,10 +64,9 @@ export default function SignIn() {
     };
     const fullURI = BASEURI + BASEID + TABLEID;
     fetchUsers(fullURI, myRequestOptions);
-    //do i put the isLoading state to true here or before I call the fetch hook
   };
 
-  //pulling the full list of users
+  //trigger the call for the full list of users above
   useEffect(() => {
     checkSession();
     if (errors.length === 0 && submitting) {
@@ -90,17 +91,22 @@ export default function SignIn() {
             sessionStorage.setItem('user', JSON.stringify(sessionObj));
             setAuthenticated(true);
             break;
-          } else console.log('incorrect password');
-        } else console.log('incorrect username');
+          } else {
+            console.log('incorrect password');
+          }
+        } else {
+          console.log('incorrect username');
+        }
       }
     }
+    setSubmitting(false);
   }, [users]);
 
   const handleSubmit = e => {
     e.preventDefault();
+    setSubmitting(true);
     setErrors(validateValues({email: creds.email, password: creds.password}));
-    //creds are valid - checking the user/password logic here
-    setSubmitting(true); //need to set this back to false if the login fails
+    //creds are valid - checking the user/password logic here //need to set this back to false if the login fails
   };
 
   const handleChange = e => {
@@ -126,6 +132,7 @@ export default function SignIn() {
           <Typography component="h1" variant="h5">
             Sign in
           </Typography>
+          {submitting && <CircularProgress />}
           {errors.map(error => (
             <div>{error}</div>
           ))}
