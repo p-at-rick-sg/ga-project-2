@@ -36,7 +36,6 @@ export default function SignIn() {
         setSubmitting(false);
       }
     } else errors.push('Invalid Email Address');
-    setSubmitting(false);
     return errors;
   };
 
